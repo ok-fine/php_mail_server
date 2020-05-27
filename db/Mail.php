@@ -51,15 +51,21 @@ class Mail
     static public function listMail($mail_name){
         $mail_addr = $mail_name . Config::$DOMAIN;
         $db = new Mysql();
-        $sql = "SELECT email_id, mail_from, subject, time, id_read FROM email WHERE to = \"$mail_addr\" ORDER BY time DESC ";
+        $sql = "SELECT email_id, mail_from, subject, time, is_read, size FROM email WHERE mail_to = \"$mail_addr\" ORDER BY time DESC ";
         return $db->Query($sql);
     }
 
     //获取邮件详情
+    //只要获取了，就相当于读了，需要标为已读
     static public function getMail($email_id){
         $db = new Mysql();
-        $sql = "SELECT * FROM email WHERE to = \"$email_id\"";
-        return $db->Query($sql);
+        $sql = array(
+            "SELECT * FROM email WHERE email_id = \"$email_id\"",
+            "UPDATE email SET is_read = 1 WHERE email_id = \"$email_id\""
+        );
+        $type = array(1, 3);
+        $res = $db->commit($sql, $type);
+        return $res[0][0];
     }
 
     //删除邮件
@@ -68,15 +74,6 @@ class Mail
         $sql = "DELETE FROM email WHERE email_id = \"$email_id\"";
         return $db->Updata($sql);
     }
-
-    //获取所有邮件
-    static public function getAllMails($mail_name){
-        $mail_addr = $mail_name . Config::$DOMAIN;
-        $db = new Mysql();
-        $sql = "SELECT mail_from, subject, body, time FROM email WHERE mail_to = \"$mail_addr\"";
-        return $db->Query($sql);
-    }
-
 
     //数组转字符串函数
     static public function array2string($array){
@@ -92,3 +89,9 @@ class Mail
     }
 
 }
+
+//var_dump(Mail::listMail('kaia'));
+
+echo base64_encode('kaia');
+echo ' ';
+echo base64_encode('123');

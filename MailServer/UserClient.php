@@ -102,10 +102,12 @@ class UserClient
 //            print $callback . "\n";
             print "From Server: " .$callback . "\n";
 
-            $callback = explode(" ", $callback);
+            $error = explode(" ", $callback);
 
-            if(count($callback) >= 2 && ($callback[0] == "Error" || $callback[1] == "Error")){
+            if(count($error) >= 2 && ($error[0] == "Error" || $error[1] == "Error")){
                 return 0;
+            }else{
+                return $callback;
             }
         }
 

@@ -120,6 +120,13 @@ class MailUser
         return $users;
     }
 
+    static public function getPass($mail_name){
+        $db = new Mysql();
+        $sql = "SELECT mail_pwd FROM mail_user WHERE mail_name = \"$mail_name\"";
+        $pass = $db->Query($sql);
+        return $pass;
+    }
+
     //通过用户的邮箱号获得用户端口号
     static public function getPort($mail_addr){
         if(!strpos($mail_addr, Config::$DOMAIN)){

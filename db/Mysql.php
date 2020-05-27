@@ -79,7 +79,7 @@ class Mysql
         return $result;
     }
 
-    public function Query($sql)//两个参数：sql语句，判断返回1查询或是增删改的返回
+    public function Query($sql)//查询
     {
         //造一个连接对象，参数是上面的那四个
         $db = $this->Connect();
@@ -154,4 +154,9 @@ class Mysql
 //$type = array(2, 2, 2, 3, 1);
 //$res = $db->commit($sql, $type);
 //print $res[4][1][1] . ' ' . $res[0] . '<br>';
+
+//$db = new Mysql();
+//$mail_name = 'wjy';
+//$res = $db->Query("SELECT mail_pwd FROM mail_user WHERE mail_name = \"$mail_name\"");
+//echo count($res);
 

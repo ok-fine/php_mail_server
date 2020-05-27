@@ -173,7 +173,7 @@ class MailServer
             $admin_name = $command[2];
 
             $data = json_encode(array(
-                'Admin:' => $admin_name,
+                'Admin' => $admin_name,
                 'Deleted User' => $mail_name
                 ));
 
@@ -202,7 +202,7 @@ class MailServer
             $mod_power = $command[5];
 
             $data = json_encode(array(
-                'Admin:' => "('" . $client_address . "' " . $port . ")",
+                'Admin' => "('" . $client_address . "' " . $port . ")",
                 'Modified User' => $mail_name
             ));
 
