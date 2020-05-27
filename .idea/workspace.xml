@@ -1,23 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b5d51722-cd1f-4950-8faf-15e60a1825ab" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config.php" beforeDir="false" afterPath="$PROJECT_DIR$/Config.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controller/POP3Mgr.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controller/POP3Mgr.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controller/js/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controller/js/jquery.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MailClient/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/MailClient/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MailServer/MailServer.php" beforeDir="false" afterPath="$PROJECT_DIR$/MailServer/MailServer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MailServer/POP3.php" beforeDir="false" afterPath="$PROJECT_DIR$/MailServer/POP3.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MailServer/UserClient.php" beforeDir="false" afterPath="$PROJECT_DIR$/MailServer/UserClient.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/Log.php" beforeDir="false" afterPath="$PROJECT_DIR$/db/Log.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/Mail.php" beforeDir="false" afterPath="$PROJECT_DIR$/db/Mail.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/MailUser.php" beforeDir="false" afterPath="$PROJECT_DIR$/db/MailUser.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/Mysql.php" beforeDir="false" afterPath="$PROJECT_DIR$/db/Mysql.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/log.txt" afterDir="false" />
-    </list>
+    <list default="true" id="b5d51722-cd1f-4950-8faf-15e60a1825ab" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -103,7 +87,7 @@
       <workItem from="1587652520202" duration="79569000" />
       <workItem from="1587832423782" duration="28153000" />
       <workItem from="1589551437199" duration="792000" />
-      <workItem from="1590571489330" duration="18609000" />
+      <workItem from="1590571489330" duration="18734000" />
     </task>
     <servers />
   </component>
