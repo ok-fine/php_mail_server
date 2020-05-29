@@ -3,25 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="b5d51722-cd1f-4950-8faf-15e60a1825ab" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config.php" beforeDir="false" afterPath="$PROJECT_DIR$/Config.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controller/AddUser.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controller/AddUser.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controller/HomePage.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controller/HomePage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controller/InfoMgr.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controller/InfoMgr.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controller/LogMgr.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controller/LogMgr.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controller/Login.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controller/Login.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controller/POP3Mgr.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controller/POP3Mgr.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controller/Register.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controller/Register.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controller/SMTPMgr.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controller/SMTPMgr.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controller/SystemMgr.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controller/SystemMgr.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controller/UserMgr.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controller/UserMgr.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MailClient/Admin.php" beforeDir="false" afterPath="$PROJECT_DIR$/MailClient/Admin.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MailServer/MailServer.php" beforeDir="false" afterPath="$PROJECT_DIR$/MailServer/MailServer.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MailServer/POP3.php" beforeDir="false" afterPath="$PROJECT_DIR$/MailServer/POP3.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MailServer/SMTP.php" beforeDir="false" afterPath="$PROJECT_DIR$/MailServer/SMTP.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MailServer/UserClient.php" beforeDir="false" afterPath="$PROJECT_DIR$/MailServer/UserClient.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MailServer/UserServer.php" beforeDir="false" afterPath="$PROJECT_DIR$/MailServer/UserServer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/Log.php" beforeDir="false" afterPath="$PROJECT_DIR$/db/Log.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db/Mail.php" beforeDir="false" afterPath="$PROJECT_DIR$/db/Mail.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db/MailUser.php" beforeDir="false" afterPath="$PROJECT_DIR$/db/MailUser.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/Mysql.php" beforeDir="false" afterPath="$PROJECT_DIR$/db/Mysql.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/log.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -114,7 +101,8 @@
       <workItem from="1590651444082" duration="4963000" />
       <workItem from="1590665043717" duration="10393000" />
       <workItem from="1590723018557" duration="72000" />
-      <workItem from="1590727387560" duration="15997000" />
+      <workItem from="1590727387560" duration="18710000" />
+      <workItem from="1590761233779" duration="7278000" />
     </task>
     <servers />
   </component>
@@ -190,10 +178,10 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="541" y="380" key="NewPhpFileDialog/0.0.1440.900@0.0.1440.900" timestamp="1590735377891" />
-    <state x="399" y="275" key="com.intellij.ide.util.TipDialog" timestamp="1590727664833">
-      <screen x="0" y="23" width="1440" height="803" />
+    <state x="399" y="282" key="com.intellij.ide.util.TipDialog" timestamp="1590761234112">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="399" y="282" key="com.intellij.ide.util.TipDialog/0.0.1440.900@0.0.1440.900" timestamp="1590665057109" />
+    <state x="399" y="282" key="com.intellij.ide.util.TipDialog/0.0.1440.900@0.0.1440.900" timestamp="1590761234112" />
     <state x="399" y="275" key="com.intellij.ide.util.TipDialog/0.23.1440.803@0.23.1440.803" timestamp="1590727664833" />
     <state x="399" y="275" key="com.intellij.ide.util.TipDialog/0.23.1440.805@0.23.1440.805" timestamp="1590646729428" />
     <state x="515" y="146" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1590665061024">

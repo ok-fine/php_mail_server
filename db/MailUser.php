@@ -185,9 +185,9 @@ class MailUser
         $user_info['mail_addr'] = $res[0][1];
         $user_info['mail_pwd'] = $res[0][2];
         $user_info['port'] = $res[0][3];
-        $user_info['send_power'] = $res[0][4];
-        $user_info['get_power'] = $res[0][5];
-        $user_info['is_admin'] = $res[0][6];
+        $user_info['is_admin'] = $res[0][4];
+        $user_info['send_power'] = $res[0][5];
+        $user_info['get_power'] = $res[0][6];
         $user_info['mod_power'] = $res[0][7];
         return $user_info;
     }

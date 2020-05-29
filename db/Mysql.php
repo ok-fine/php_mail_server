@@ -12,10 +12,6 @@ class Mysql
     private $username;
     private $password;
     private $dbname;
-//    private $servername = "localhost";
-//    private $username = "root";
-//    private $password = "game123456";
-//    private $dbname = "PhpMailer";
 
     public function __construct()
     {

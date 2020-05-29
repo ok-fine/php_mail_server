@@ -189,14 +189,18 @@ class POP3
                     }
 
                     for($i = 0 ; $i < count($delete_list) ; $i++){
-                        \src\Mail::deleteMail($delete_list[$i]);
-
                         $mail_info = \src\Mail::getMail($delete_list[$i]);
                         $mail = json_encode(array(
                             'from' => $mail_info[1],
                             'to' => $mail_info[2],
                             'subject' => $mail_info[3]
                         ));
+
+                        echo "delet mail info:";
+                        var_dump($mail);
+                        echo "<br>";
+
+                        \src\Mail::deleteMail($delete_list[$i]);
 
                         //删除邮件日志
                         \src\Log::create($client_address, $port,"delete mail", $mail, "Successful", $user_name, "POP3");

@@ -45,13 +45,17 @@ $mail = $info["mail_addr"];
 $mail_pwd = $info["mail_pwd"];
 
 //获取用户过滤信息
-$filter_cont = \src\Mail::get_filter($account);
-var_dump($filter_cont);
+//$filter_cont = array();
+//array_push($filter_cont, \src\Mail::get_ac_filter($account));
+//array_push($filter_cont, \src\Mail::get_ip_filter($account));
+//var_dump($filter_cont);
 
 $front_page = "user";
-$ac_list = $ip_list =  array();
-$anum = count($filter_cont[0]);
-$inum = count($filter_cont[1]);
+$ac_list = \src\Mail::get_ac_filter($account);
+$ip_list = \src\Mail::get_ip_filter($account);
+$anum = $inum = 1;
+var_dump($ac_list);
+var_dump($ip_list);
 
 $logErr = "";
 $err_num = 2;
@@ -59,6 +63,18 @@ $err_num = 2;
 if(!empty($_GET['front'])){
     $front_page = $_GET['front'];
 }
+
+if(!empty($_GET['ac_list'])){
+    array_merge($ac_list, $_GET['ac_list']);
+//    $ac_list = $_GET['ac_list'];
+}
+
+if(!empty($_GET['ip_list'])){
+    array_merge($ip_list, $_GET['ip_list']);
+//    $ip_list = $_GET['ip_list'];
+}
+
+var_dump($ac_list);
 
 if(!empty($_GET['anum'])){
     $anum = $_GET['anum'];
@@ -68,16 +84,8 @@ if(!empty($_GET['inum'])){
     $inum = $_GET['inum'];
 }
 
-if(!empty($_GET['ac_list'])){
-    $ac_list = $_GET['ac_list'];
-}
-
-if(!empty($_GET['ip_list'])){
-    $ip_list = $_GET['ip_list'];
-}
-
 //邮件格式检查
-$temp = $anum;
+$temp = count($ac_list);
 for($i = 0 ; $i < count($ac_list) ; $i++){
     if(!empty($ac_list[$i])){
         if (!preg_match("/(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9][0-9]|[0-9])/",$ac_list[$i]) || !strpos($ac_list[$i], \src\Config::$DOMAIN)){
@@ -89,12 +97,12 @@ for($i = 0 ; $i < count($ac_list) ; $i++){
     }
     $temp--;
 }
-if($temp == 0){
+if($temp == 0 && count($ac_list) != 0){
     $err_num--;
 }
 
 //ip格式检查
-$temp = $inum;
+$temp = count($ip_list);
 for($i = 0 ; $i < count($ip_list) ; $i++){
     if(!empty($ip_list[$i])){
         if (!text_ip($ip_list[$i])){
@@ -106,12 +114,16 @@ for($i = 0 ; $i < count($ip_list) ; $i++){
     }
     $temp--;
 }
-if($temp == 0){
+if($temp == 0 && count($ip_list) != 0){
     $err_num--;
 }
 
+echo $err_num;
+
 //all right
 if($err_num == 0){
+    echo "aclist:";
+    var_dump($ac_list);
 
     if(\src\Mail::set_filter($account, $ac_list, $ip_list)) {
         echo "<script> alert('系统设置成功'); window.location.href='SystemMgr.php' </script>";
@@ -142,10 +154,10 @@ if($err_num == 0){
                     <tr>
                         <td width="25%">账号过滤:</td>
                         <td width="65%">
-                            <?php for($i = 0 ; $i < count($filter_cont[0]) ; $i++){ ?>
-                                <input name="ac_list[]" type="text" value="<?php echo $filter_cont[0][$i][0]; ?>"><br>
+                            <?php for($i = 0 ; $i < count($ac_list) ; $i++){ ?>
+                                <input name="ac_list[]" type="text" value="<?php echo $ac_list[$i]; ?>"><br>
                             <?php  } ?>
-                            <?php for($i = count($filter_cont[0]) ; $i < $anum ; $i++){ ?>
+                            <?php for($i = count($ac_list) ; $i < $anum ; $i++){ ?>
                                 <input name="ac_list[]" type="text"><br>
                             <?php  } ?>
                         </td>
@@ -156,10 +168,10 @@ if($err_num == 0){
                     <tr>
                         <td>IP过滤：</td>
                         <td>
-                            <?php for($i = 0 ; $i < count($filter_cont[1]) ; $i++){ ?>
-                                <input name="ac_list[]" type="text" value="<?php echo $filter_cont[1][$i][0]; ?>"><br>
+                            <?php for($i = 0 ; $i < count($ip_list) ; $i++){ ?>
+                                <input name="ac_list[]" type="text" value="<?php echo $ip_list[$i]; ?>"><br>
                             <?php  } ?>
-                            <?php for($i = count($filter_cont[1]) ; $i < $inum ; $i++){ ?>
+                            <?php for($i = count($ip_list) ; $i < $inum ; $i++){ ?>
                                 <input name="ip_list[]" type="text"><br>
                             <?php  } ?>
                         </td>

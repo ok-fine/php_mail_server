@@ -61,7 +61,7 @@ class Mail
         $db = new Mysql();
         $sql = array(
             "SELECT * FROM email WHERE email_id = \"$email_id\"",
-            "UPDATE email SET is_read = 1 WHERE email_id = \"$email_id\""
+            "UPDATE email SET is_read = '1' WHERE email_id = \"$email_id\""
         );
         $type = array(1, 3);
         $res = $db->commit($sql, $type);
@@ -75,35 +75,44 @@ class Mail
         return $db->Updata($sql);
     }
 
-    //数组转字符串函数
-    static public function array2string($array){
-        $string = [];
+    //系统设置，即过滤设置
+    static public function get_ac_filter($user_name){
+        $db = new Mysql();
+        $sql = "SELECT cont FROM ac_filter WHERE mail_name = \"$user_name\"";
 
-        if($array && is_array($array)){
-            foreach ($array as $key=> $value){
-                $string[] = $key.'->'.$value;
-            }
+        $res = $db->Query($sql);
+        $result = array();
+        for($i = 0 ; $i < count($res); $i++){
+            array_push($result, $res[$i][0]);
         }
 
-        return implode(',',$string);
+        return $result;
     }
 
     //系统设置，即过滤设置
-    static public function get_filter($user_name){
+    static public function get_ip_filter($user_name){
         $db = new Mysql();
-        $sql = array(
-            "SELECT cont FROM ac_filter WHERE mail_name = \"$user_name\"",
-            "SELECT cont FROM ip_filter WHERE mail_name = \"$user_name\""
-        );
-        $type = array(1, 1);
-        return $db->commit($sql, $type);
+        $sql = "SELECT cont FROM ip_filter WHERE mail_name = \"$user_name\"";
+
+        $res = $db->Query($sql);
+        $result = array();
+        for($i = 0 ; $i < count($res); $i++){
+            array_push($result, $res[$i][0]);
+        }
+
+        return $result;
     }
 
     //系统设置，即过滤设置
     static public function set_filter($user_name, $ac_list, $ip_list){
         $db = new Mysql();
-        $sql = array();
-        $type = array();
+        //注意：因为插入过的不能插入，
+        $sql = array(
+            "DELETE FROM ac_filter WHERE mail_name = \"$user_name\"",
+            "DELETE FROM ip_filter WHERE mail_name = \"$user_name\"",
+        );
+        $type = array(3, 3);
+
         for($i = 0; $i = count($ac_list) ; $i++){
             array_push($sql, "INSERT INTO ac_filter VALUES (\"$user_name\", \"$ac_list[$i]\")");
             array_push($type, 2);
@@ -115,11 +124,6 @@ class Mail
         return $db->Commit($sql, $type);
     }
 
-    static public function del_all(){
-        $db = new Mysql();
-        $sql = "DELETE FROM ";
-
-    }
     static public function del_filter($user_name, $cont, $table ){
         $db = new Mysql();
         $sql = "DELETE FROM \"$table\" WHERE mail_name = \"$user_name\" AND cont = \"$cont\"";
@@ -127,5 +131,6 @@ class Mail
     }
 
 }
+
 
 

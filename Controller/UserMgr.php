@@ -178,7 +178,7 @@ $user_count = count($users);
 
 <div class="materialContainer">
     <div class="box">
-        <div class="title"><strong>用户管理</strong> <a href="SystemMgr.php?front=admin">系统设置</a><</div>
+        <div class="title"><strong>系统管理</strong> <a href="SystemMgr.php?front=admin">系统设置</a></div>
         <div class="button login">
             <button type="button" onclick="window.location.href='AddUser.php'">
                 <span>创建用户</span>
