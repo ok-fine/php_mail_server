@@ -147,7 +147,7 @@ class UserServer
                     //返回子进程号
                     print "child process, PID : " . $server_process_pid . "\n";
 
-                    \POP3::uc2us($client_socket);
+                    \POP3::uc2us($client_socket, $client_address, $port);
 
                     //子进程处理结束后一定要退出
                     //否则再次fork是在子进程的基础上进行的fork

@@ -132,11 +132,11 @@ class MailServer
             $data = json_encode(array('User' => $mail_name, 'Password' => $mail_pwd));
 
             if(MailUser::register($mail_name, $mail_pwd, $port, '1', '1', '0')){
-                Log::create($client_address, $port,"register", $data, "Successful");
+                Log::create($client_address, $port,"register", $data, "Successful", $mail_name, "SERVER");
 
                 return "OK : register succeed!\nmailaddr = " . $mail_name . Config::$DOMAIN;
             }else{
-                Log::create($client_address, $port, "register", $data, "Failed : user already exist");
+                Log::create($client_address, $port, "register", $data, "Failed : user already exist", $mail_name, "SERVER");
 
                 return "Error : register error!";
             }
@@ -153,7 +153,7 @@ class MailServer
 
                 $user_server->bind($usport);
 
-                Log::create($client_address, $port, "login", $data, "Successful");
+                Log::create($client_address, $port, "login", $data, "Successful", $mail_name, "SERVER");
 
                 //register表示还没有分配端口，不可以start，要login之后才可以start
                 $this->flag = 1;
@@ -162,7 +162,7 @@ class MailServer
 //                return 1;
             }else{
 
-                Log::create($client_address, $port, "login", $data, "Failed : password error");
+                Log::create($client_address, $port, "login", $data, "Failed : password error", $mail_name, "SERVER");
 
                 return "Error : password error";
 //                return 0;
@@ -178,10 +178,10 @@ class MailServer
                 ));
 
             if(MailUser::delete($mail_name)){
-                Log::create($client_address, $port, "detele user", $data, "Successful");
+                Log::create($client_address, $port, "detele user", $data, "Successful", $admin_name, "SERVER");
                 return "OK : delete user succeed!";
             }else{
-                Log::create($client_address, $port, "detele user", $data, "Fail : fail to delete");
+                Log::create($client_address, $port, "detele user", $data, "Fail : fail to delete user", $admin_name, "SERVER");
                 return "Error : delete user error";
             }
 
@@ -194,23 +194,25 @@ class MailServer
                 return "Error : fail to change password";
             }
 
-        }else if($command[0]  == "mod" && count($command) == 6){
+        }else if($command[0]  == "mod" && count($command) == 7){
             $mail_name = $command[1];
             $new_pwd  = $command[2];
             $stmp_state = $command[3];
             $pop_state = $command[4];
             $mod_power = $command[5];
+            $admin_name = $command[6];
 
             $data = json_encode(array(
-                'Admin' => "('" . $client_address . "' " . $port . ")",
+                'Administrator' => $admin_name,
+                'SrcIp' => "('" . $client_address . "' " . $port . ")",
                 'Modified User' => $mail_name
             ));
 
             if(MailUser::mod_info($mail_name, $new_pwd, $stmp_state, $pop_state, $mod_power)){
-                Log::create($client_address, $port, "manage user", $data, "Successful");
+                Log::create($client_address, $port, "manage user", $data, "Successful", $admin_name, "SERVER");
                 return "OK : manage user succeed!";
             }else{
-                Log::create($client_address, $port, "manage user", $data, "Fail : fail to modify");
+                Log::create($client_address, $port, "manage user", $data, "Fail : fail to modify user", $admin_name, "SERVER");
                 return "Error : fail to manage info";
             }
 

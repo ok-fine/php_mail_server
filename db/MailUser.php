@@ -14,13 +14,8 @@ require_once "../Config.php";
 
 class MailUser
 {
-    var $mail_name;
-    var $mail_addr;
     var $mail_pwd;
     var $port;
-    var $smtp_state;
-    var $pop_state;
-    var $is_admin;
 
     static public function register($mail_name, $mail_pwd, $port, $smtp_state, $pop_state, $is_admin){
         $mail_addr = $mail_name . Config::$DOMAIN;

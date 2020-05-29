@@ -59,7 +59,8 @@ class SMTP
         $mail_source = "";    //记录信的来源
         $mail_des = "";       //记录信的去处(可群发)
         $mail_subject = "";   //记录邮件主题
-        $mail_body = "";      //记录邮件内容
+
+        $user_name = "";      //记录用户名字，在日志中
 
         while(true){
             $request = socket_read($client_socket, 1024);
@@ -106,12 +107,24 @@ class SMTP
                 $password = base64_decode($recv_data);
                 print "password: " . $password . "\n";
 
+                //日志内容
+                $data = array(
+                    'User' => $username,
+                    'Password' => $password
+                );
+
                 //用户名密码数据库验证
                 if(\src\MailUser::login($username, $password)){
                     $response = "235 auth successfully";  //认证成功
+                    $user_name = $username;
                     $login_state = 1;
+
+                    \src\Log::create($client_address, $port,"SMTP auth", json_encode($data) , "Successful", $user_name, "SMTP");
+
                 }else{
                     $response = "535 Error : auth failed";  //认证失败
+
+                    \src\Log::create($client_address, $port,"SMTP auth", json_encode($data) , "Failed : password error", $user_name, "SMTP");
                 }
 
                 socket_send($client_socket, $response, strlen($response), MSG_DONTROUTE);
@@ -170,7 +183,7 @@ class SMTP
 
                 $response = "get the letter";
                 socket_send($client_socket, $response, strlen($response), MSG_DONTROUTE);
-                $res = self::us_mail_send($mail, $client_address, $port);
+                $res = self::us_mail_send($mail, $client_address, $port, $user_name);
 
                 if($res){
                     $response = "250 Message sent";
@@ -195,7 +208,7 @@ class SMTP
 
 
     //UserServer将从客户端（client_address，port）处读到的邮件发送到另一个us服务器
-    static  public function us_mail_send($mail, $client_address, $port){
+    static  public function us_mail_send($mail, $client_address, $port, $user_name){
         print "mail: ";
         var_dump($mail);
 
@@ -210,7 +223,7 @@ class SMTP
         $clientip = gethostbyname(gethostname());
 
         //开始投递邮件
-        \src\Log::create($client_address, $port,"deliver mail", json_encode($mail_log), "Mail delivering");
+        \src\Log::create($client_address, $port,"start deliver", json_encode($mail_log), "Mail Delivering...", $user_name, "SMTP");
 
         //有多少个人成功
         $succ = 0;
@@ -237,23 +250,38 @@ class SMTP
             print "send to host and Port: '" . $hostip . "' ". $usport . "\n";
 
             $flagi = 0;
+            $num = 0;//当尝试链接目标服务器失败后，自动保存到邮箱中，
+            //这个问题还没有解决：只能发送给登陆好的用户，发送后，用户再登陆，是没法就收的
             while ($flagi != 1){
-                if(socket_connect($client_socket, $hostip, $usport)){
-                    $flagi = 1;
-                }else{
-                    print "目的服务器程序('" . $hostip . "' " . $usport . ")未启动\n";
-                    time_sleep_until(time() + 120); //1800每半小时发一次
-//                sleep(1800);
+                try{
+                    $num++;
+                    if($num >= 2){
+                        $flagi = 1 ;
+                    }else{
+                        if(socket_connect($client_socket, $hostip, $usport)){
+                            $flagi = 1;
+                        }else{
+                            print "目的服务器程序('" . $hostip . "' " . $usport . ")未启动\n";
+                            time_sleep_until(time() + 120); //1800每半小时发一次
+                        }
+                    }
+                }catch (Error $e){
+                    throw $e;
                 }
             }
 
-            socket_send($client_socket, json_encode($mail_array), strlen(json_encode($mail_array)), MSG_DONTROUTE);
-            socket_close($client_socket);
+
+            if($num >= 2){ //直接发送
+                \src\Mail::saveMail(json_encode($mail_array));
+            }else{
+                socket_send($client_socket, json_encode($mail_array), strlen(json_encode($mail_array)), MSG_DONTROUTE);
+                socket_close($client_socket);
+            }
 
             $succ++;
 
             //投递邮件
-            \src\Log::create($client_address, $port,"deliver letter", json_encode($mail_log), "Deliver success");
+            \src\Log::create($client_address, $port,"deliver mail", json_encode($mail_log), "Successful", $user_name, "SMTP");
         }
         return $succ;
     }

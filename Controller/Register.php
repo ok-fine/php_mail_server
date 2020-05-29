@@ -59,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET")
 //        echo "right";
 
         $res = \src\MailClient\User::register($account, $password);
-        if($res == 1){
+        if($res != false){
             if(\src\MailClient\User::login($account, $password)){
                 $life_time = 1800; //3600为 1 小时
                 session_set_cookie_params($life_time);

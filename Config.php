@@ -13,7 +13,7 @@ class Config
     //set domain of the mail server;
     static public $DOMAIN = "@123.com";
 
-    static public $HOSTIP = "127.0.0.1";
+    static public $HOSTIP = "192.168.1.4";
     static public $HOSTPORT = 56263;
 
     static public $PAGENUM = 10;

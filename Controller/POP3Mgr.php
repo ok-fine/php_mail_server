@@ -101,6 +101,7 @@ echo $info['user_name'] . ", 好好学习 天天向上";
                 <?php } ?>
             <?php } ?>
         </table>
+    第<?php $page_num = ceil($mail_num / \src\Config::$PAGENUM); echo min($page_num, $start / \src\Config::$PAGENUM + 1); ?>页/共<?php echo $page_num;?>页
     <a href="POP3Mgr.php?start=<?php echo $start - \src\Config::$PAGENUM ?>" >上一页</a>
     <a href="POP3Mgr.php?start=<?php echo $start + \src\Config::$PAGENUM ?>">下一页</a>
 

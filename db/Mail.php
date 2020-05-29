@@ -88,10 +88,44 @@ class Mail
         return implode(',',$string);
     }
 
+    //系统设置，即过滤设置
+    static public function get_filter($user_name){
+        $db = new Mysql();
+        $sql = array(
+            "SELECT cont FROM ac_filter WHERE mail_name = \"$user_name\"",
+            "SELECT cont FROM ip_filter WHERE mail_name = \"$user_name\""
+        );
+        $type = array(1, 1);
+        return $db->commit($sql, $type);
+    }
+
+    //系统设置，即过滤设置
+    static public function set_filter($user_name, $ac_list, $ip_list){
+        $db = new Mysql();
+        $sql = array();
+        $type = array();
+        for($i = 0; $i = count($ac_list) ; $i++){
+            array_push($sql, "INSERT INTO ac_filter VALUES (\"$user_name\", \"$ac_list[$i]\")");
+            array_push($type, 2);
+        }
+        for($i = 0; $i = count($ip_list) ; $i++){
+            array_push($sql, "INSERT INTO ip_filter VALUES (\"$user_name\", \"$ip_list[$i]\")");
+            array_push($type, 2);
+        }
+        return $db->Commit($sql, $type);
+    }
+
+    static public function del_all(){
+        $db = new Mysql();
+        $sql = "DELETE FROM ";
+
+    }
+    static public function del_filter($user_name, $cont, $table ){
+        $db = new Mysql();
+        $sql = "DELETE FROM \"$table\" WHERE mail_name = \"$user_name\" AND cont = \"$cont\"";
+        return $db->Updata($sql);
+    }
+
 }
 
-//var_dump(Mail::listMail('kaia'));
 
-echo base64_encode('kaia');
-echo ' ';
-echo base64_encode('123');

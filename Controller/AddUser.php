@@ -68,7 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 //        echo "right";
 
         $res = \src\MailClient\User::register($account, $password);
-        if ($res == 1) {
+        if ($res != false) {
             echo "<script> alert('用户创建成功'); window.location.href='UserMgr.php';</script>";
 
 //            header('location:UserMgr.php');

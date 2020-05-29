@@ -142,9 +142,9 @@ if ($_SERVER["REQUEST_METHOD"] == "GET")
             //        //填写正确的话
             if($errnum == 0){
 
-                $res = \src\MailServer\Admin::modify($user_name, $mail_pwd, $send_power, $get_power, $mod_power);
+                $res = \src\MailServer\Admin::modify($user_name, $mail_pwd, $send_power, $get_power, $mod_power, $admin_name);
 
-                if($res == 1){
+                if($res != false){
 //                    $error = "信息修改成功";
                     echo "<script> alert('信息修改成功');</script>";
 
@@ -178,7 +178,7 @@ $user_count = count($users);
 
 <div class="materialContainer">
     <div class="box">
-        <div class="title">用户管理</div>
+        <div class="title"><strong>用户管理</strong> <a href="SystemMgr.php?front=admin">系统设置</a><</div>
         <div class="button login">
             <button type="button" onclick="window.location.href='AddUser.php'">
                 <span>创建用户</span>
@@ -231,15 +231,15 @@ $user_count = count($users);
             </div>
             <div class="power">
                 <?php if($user_info['send_power']){ ?>
-                    <input type="checkbox" name="send_power" value="1" checked="checked">发邮件&nbsp
+                    <input type="checkbox" name="send_power" value="1" checked="checked">发邮件(SMTP)&nbsp
                 <?php }else{ ?>
-                    <input type="checkbox" name="send_power" value="1">发邮件&nbsp
+                    <input type="checkbox" name="send_power" value="1">发邮件(SMTP)&nbsp
                 <?php } ?>
 
                 <?php if($user_info['get_power']){ ?>
-                    <input type="checkbox" name="get_power" value="1" checked="checked">收邮件&nbsp
+                    <input type="checkbox" name="get_power" value="1" checked="checked">收邮件(POP3)&nbsp
                 <?php }else{ ?>
-                    <input type="checkbox" name="get_power" value="1">收邮件&nbsp
+                    <input type="checkbox" name="get_power" value="1">收邮件(POP3)&nbsp
                 <?php } ?>
 
                 <?php if($user_info['mod_power']){ ?>

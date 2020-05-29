@@ -105,13 +105,13 @@ class UserClient
             $error = explode(" ", $callback);
 
             if(count($error) >= 2 && ($error[0] == "Error" || $error[1] == "Error")){
-                return 0;
+                return false;
             }else{
                 return $callback;
             }
         }
 
-        return 1;
+        return true;
     }
 
 }

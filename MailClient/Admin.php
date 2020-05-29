@@ -21,13 +21,13 @@ class Admin
     }
 
 
-    static public function modify($mail_name, $mail_pwd, $send_power, $get_power, $mod_power){
+    static public function modify($mail_name, $mail_pwd, $send_power, $get_power, $mod_power, $admin_name){
         $client = new UserClient();
         $client->bind(3);
 
         $client->connect("register", \src\Config::$HOSTIP);
 
-        $res = $client->execute("mod " . $mail_name . " " . $mail_pwd . " " . $send_power . " " . $get_power . " " . $mod_power);
+        $res = $client->execute("mod " . $mail_name . " " . $mail_pwd . " " . $send_power . " " . $get_power . " " . $mod_power . " " . $admin_name);
         $client->execute("QUIT");
 
         return $res;

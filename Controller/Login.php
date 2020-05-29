@@ -53,9 +53,10 @@ if ($_SERVER["REQUEST_METHOD"] == "GET")
     //填写正确的话
     if($errnum == 0){
         $log = \src\MailClient\User::login($account, $password);
-        if($log){
+        if($log != false){
+            echo "log: " . $log;
 
-            $life_time = 1800; //3600为 1 小时
+            $life_time = 600; //10mins,  3600为 1 小时
             session_set_cookie_params($life_time);
             //在登陆时打开全局session，用来存储user；
             session_start();

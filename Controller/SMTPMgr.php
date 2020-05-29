@@ -203,18 +203,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 if($err_num == 0){
 
     $sendto = $sendto_email[0];
-    for($i = 1; $i < $mail_count; $i++){
+    for($i = 1; $i < count($sendto_email); $i++){
         if(!empty($sendto_email[$i])){
             $sendto .= " ";
             $sendto .= $sendto_email[$i];
         }
     }
 
-    print "RCPT TO: " . $sendto . "\n";
+//    print "RCPT TO: " . $sendto . "\n";
 
     $res = SMTP::send_mail($user_name, $mail_pwd, $sendto, $subject, $body);
 
-    if($res){
+    if($res != false){
         echo "<script> alert('邮件发送成功'); window.location.href='SMTPMgr.php' </script>";
     }else{
         echo "<script> alert('部分邮件发送失败，请重试'); </script>";

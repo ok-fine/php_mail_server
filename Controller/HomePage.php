@@ -104,8 +104,13 @@ if (isset($_SESSION["login"])) {
                     <i class="fa fa-check"></i>
                 </button>
             </a>
-
         <?php }  ?>
+        <a href="LogMgr.php" class="button login">
+            <button>
+                <span>日志管理</span>
+                <i class="fa fa-check"></i>
+            </button>
+        </a>
     </div>
     <div class="overbox">
         <button type="button" class="btn btn-primary" onclick="window.location.href='Login.php'">

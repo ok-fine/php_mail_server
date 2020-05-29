@@ -71,7 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET")
     //填写正确的话
     if($errnum == 0){
 //        echo "right";
-        if(\src\MailClient\User::modify($account, $mail_pwd)){
+        if(\src\MailClient\User::modify($account, $mail_pwd) != false){
             $error = "信息修改成功";
             echo "<script> alert('信息修改成功');</script>";
 
@@ -99,7 +99,7 @@ function test_input($data)
 
 <div class="materialContainer">
     <div class="box">
-        <div class="title">账号管理</div>
+        <div class="title"><strong>账号设置</strong> <a href="SystemMgr.php?front=user">系统设置</a></div>
         <form method="get" action="<?php htmlspecialchars($_SERVER["PHP_SELF"]);?>" class="login_form">
             <div class="input">
                 <label for="name" style="line-height: 18px; font-size: 18px; font-weight: 100; top: 0px;">用户名</label>
