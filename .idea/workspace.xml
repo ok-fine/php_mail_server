@@ -3,14 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b5d51722-cd1f-4950-8faf-15e60a1825ab" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config.php" beforeDir="false" afterPath="$PROJECT_DIR$/Config.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controller/HomePage.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controller/HomePage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controller/SystemMgr.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controller/SystemMgr.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controller/UserMgr.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controller/UserMgr.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MailClient/text.php" beforeDir="false" afterPath="$PROJECT_DIR$/MailClient/text.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MailServer/SMTP.php" beforeDir="false" afterPath="$PROJECT_DIR$/MailServer/SMTP.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhpMailer.sql" beforeDir="false" afterPath="$PROJECT_DIR$/PhpMailer.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/Mail.php" beforeDir="false" afterPath="$PROJECT_DIR$/db/Mail.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/log.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -113,7 +105,7 @@
       <workItem from="1590849419189" duration="635000" />
       <workItem from="1590902071317" duration="107000" />
       <workItem from="1590911924798" duration="5140000" />
-      <workItem from="1590917831221" duration="7315000" />
+      <workItem from="1590917831221" duration="7606000" />
     </task>
     <servers />
   </component>
