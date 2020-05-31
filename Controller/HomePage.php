@@ -100,7 +100,7 @@ if (isset($_SESSION["login"])) {
             </a>
             <a href="UserMgr.php" class="button login">
                 <button>
-                    <span>用户管理</span>
+                    <span>系统管理</span>
                     <i class="fa fa-check"></i>
                 </button>
             </a>

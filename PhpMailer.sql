@@ -14,7 +14,7 @@
  Date: 30/05/2020 01:46:01
 */
 
-SET NAMES utf8mb4;
+SET NAMES utf8;
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
@@ -25,7 +25,7 @@ CREATE TABLE `ac_filter` (
   `mail_name` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `cont` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`mail_name`,`cont`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- ----------------------------
 -- Table structure for email
@@ -41,7 +41,7 @@ CREATE TABLE `email` (
   `size` int DEFAULT NULL,
   `is_read` char(1) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '0',
   PRIMARY KEY (`email_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- ----------------------------
 -- Records of email
@@ -64,7 +64,7 @@ CREATE TABLE `ip_filter` (
   `mail_name` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `cont` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`mail_name`,`cont`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- ----------------------------
 -- Table structure for log
@@ -80,7 +80,7 @@ CREATE TABLE `log` (
   `op_user` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `type` enum('ALL','SMTP','POP3','SERVER') CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`log_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=84 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=84 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- ----------------------------
 -- Records of log
@@ -131,7 +131,7 @@ CREATE TABLE `mail_user` (
   `pop_state` char(1) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '1',
   `mod_power` char(1) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '1',
   PRIMARY KEY (`mail_name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- ----------------------------
 -- Records of mail_user

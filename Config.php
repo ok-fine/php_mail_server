@@ -14,7 +14,7 @@ class Config
     static public $DOMAIN = "@123.com";
 
     static public $HOSTIP = "192.168.1.4";
-    static public $HOSTPORT = 56263;
+    static public $HOSTPORT = 56264;
 
     static public $PAGENUM = 10;
 }

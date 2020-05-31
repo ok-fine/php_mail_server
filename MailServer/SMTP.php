@@ -32,7 +32,7 @@ class SMTP
     static public function send_mail($mail_name, $mail_pwd, $send_to, $subject, $body){
         $client = new UserClient();
         $client->bind(1);
-        $client->connect("wjy", Config::$HOSTIP);
+        $client->connect($mail_name, Config::$HOSTIP);
 
         $client->execute("HELO");
         $client->execute("AUTH LOGIN");
@@ -271,34 +271,87 @@ class SMTP
             }
 
 
-            if($num >= 2){ //直接发送
-                \src\Mail::saveMail(json_encode($mail_array));
+            if($num >= 2){
+//                //直接保存
+//                \src\Mail::saveMail(json_encode($mail_array));
+
+                //直接抛弃
+                continue;
             }else{
                 socket_send($client_socket, json_encode($mail_array), strlen(json_encode($mail_array)), MSG_DONTROUTE);
+                $result = socket_read($client_socket, 1024);
                 socket_close($client_socket);
+
+                echo "send result: " . $result . "\n";
+
+                $result = explode(" ", $result);
+                var_dump($result);
+                if($result[1] == "Error"){
+                    continue;
+                }
             }
 
+            echo "succnum：" . $succ . "\n";
             $succ++;
 
             //投递邮件
             \src\Log::create($client_address, $port,"deliver mail", json_encode($mail_log), "Successful", $user_name, "SMTP");
         }
-        return $succ;
+        echo "succnum：" . $succ . "\n";
+        return $succ == count($mail_des);
     }
 
     //UserServer接收从服务器发来的邮件，并存储到邮箱，之后通过pop协议获取到客户端
     static public function us_mail_recv($client_socket){
+        socket_getpeername($client_socket, $ip, $port);
+
         $mail = socket_read($client_socket, 1024); //json格式
         print "request mail: ";
+        echo $mail . "\n";
+        $mail = json_decode($mail, true);
         var_dump($mail);
 
-        $response = "250 ok";
-        socket_send($client_socket, $response, strlen($response), MSG_DONTROUTE);
-        \src\Mail::saveMail($mail);
+        echo "username:" ;
+        var_dump($mail['to']);
+        echo "\n过滤地址:";
+        var_dump($mail['from']);
+        echo "\n过滤IP:";
+        var_dump($ip);
+        echo "\n";
+
+        //过滤邮件地址和ip
+        if(\src\Mail::filter_addr($mail['to'], $mail['from'], $ip )) {
+            $response = "250 ok";
+            socket_send($client_socket, $response, strlen($response), MSG_DONTROUTE);
+
+            \src\Mail::saveMail(json_encode($mail));
+        }else{
+            $response = "501 Error : the mail has be intercepted!";
+            socket_send($client_socket, $response, strlen($response), MSG_DONTROUTE);
+
+            //拦截邮件的日志
+            $mail_log = $mail;
+            array_pop($mail_log);
+            $user_name = substr($mail['to'],0, strripos($mail['to'], Config::$DOMAIN));
+            \src\Log::create($ip, $port, "intercept mail", json_encode($mail_log), "Successful", $user_name, "SMTP");
+        }
     }
 
 
 }
+
+//$mail = array(
+//    "from" => "wjy@123.com",
+//    "to" => "kaia@123.com"
+//);
+//$mail = json_encode($mail);
+//var_dump($mail);
+//echo "<br>";
+//
+//$mail = json_decode($mail, true);
+//var_dump($mail);
+//echo "<br>";
+
 
 //$a = "12345]6789";
 //$b = substr($a, strpos($a, "]") + 1);

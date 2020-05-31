@@ -81,3 +81,5 @@ function try2(){
 
 
 try1();
+
+//echo phpinfo();

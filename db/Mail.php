@@ -113,24 +113,57 @@ class Mail
         );
         $type = array(3, 3);
 
-        for($i = 0; $i = count($ac_list) ; $i++){
+        for($i = 0; $i < count($ac_list) ; $i++){
             array_push($sql, "INSERT INTO ac_filter VALUES (\"$user_name\", \"$ac_list[$i]\")");
             array_push($type, 2);
         }
-        for($i = 0; $i = count($ip_list) ; $i++){
+        for($i = 0; $i < count($ip_list) ; $i++){
             array_push($sql, "INSERT INTO ip_filter VALUES (\"$user_name\", \"$ip_list[$i]\")");
             array_push($type, 2);
         }
         return $db->Commit($sql, $type);
     }
 
-    static public function del_filter($user_name, $cont, $table ){
-        $db = new Mysql();
-        $sql = "DELETE FROM \"$table\" WHERE mail_name = \"$user_name\" AND cont = \"$cont\"";
-        return $db->Updata($sql);
+    static public function filter_addr($user_name, $ac, $ip){
+        $user_name = substr($user_name,0, strripos($user_name, Config::$DOMAIN));
+
+        $ac_list = self::get_ac_filter($user_name);
+        $ip_list = self::get_ip_filter($user_name);
+        if($ac_list == null) $ac_list = array();
+        if($ip_list == null) $ip_list = array();
+
+        var_dump($ac_list);
+        var_dump($ip_list);
+
+        $ac_all = "begin:";
+        $ip_all = "begin:";
+        for($i = 0 ; $i < count($ac_list) ; $i++){
+            $ac_all .= $ac_list[$i];
+        }
+
+        for($i = 0 ; $i < count($ip_list) ; $i++){
+            $ip_all .= $ip_list[$i];
+        }
+
+        echo "ac:" . $ac_all . "<br>";
+        echo "ip:" . $ip_all . "<br>";
+
+        echo strpos($ac_all, $ac);
+
+        if(strpos($ac_all, $ac) || strpos($ip_all, $ip)){
+            return false;
+        }else{
+            return true;
+        }
     }
 
 }
-
-
+//
+//if(Mail::filter_addr("kaia@123.com", "wjy@123.com", "1.1.1.1")){
+//    echo "能发";
+//}else{
+//    echo "不能发";
+//}
+//
+//echo "<br>" . strpos("wjy@123.com", "sss");
 
