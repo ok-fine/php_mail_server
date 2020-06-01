@@ -2,15 +2,43 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>收件箱</title>
+    <title>邮件详情</title>
+    <link rel="stylesheet" href="css/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css">
     <style>
+         html,body {
+          height: 100%;
+        }
+        body {
+          margin-left: 60px;
+          margin-top: 60px;
+          margin-right: 60px;
+          margin-bottom: 60px;
+          overflow:hidden;
+        }
         .subject {
             font-weight: bold;
             font-size: x-large;
+            margin-left: 10px;
+            margin-top: 10px;
         }
         .info {
-            color: darkgrey;
-            font-size: small;
+            color: black;
+            font-size: large;
+            margin-left: 20px;
+            margin-top: 20px;
+        }
+        .comments {
+             width:90%;/*自动适应父布局宽度*/
+             height: 90%;
+             overflow:auto;
+             word-break:break-all;
+             color: black;
+             font-size: 18px;
+             margin-left: 5%;
+             margin-top: 5%；
+             border: 0;
+             border-radius:5px;
         }
     </style>
 </head>
@@ -54,15 +82,16 @@ echo $info['user_name'] . ", 好好学习 天天向上";
 
 ?>
 
-<button type="button" class="btn btn-primary" onclick="window.location.href='POP3Mgr.php'">返回</button><br><br>
+
 
 <body>
 
 <div class="title">邮件详情</div>
-<table width="100%" border="1" >
+<button type="button" class="btn btn-primary" onclick="window.location.href='POP3Mgr.php'">返回</button><br><br>
+<table width="100%" height="100%" border="1" cellpadding="0" cellspacing="0" style="background-color: white">
     <tr>
-        <td>
-            <div class="subject"><?php echo $mail_info[3]?></div>
+        <td height="25%">
+            <div class="subject">111<?php echo $mail_info[3]?></div>
             <div class="info">
                 发件人：<?php echo $mail_info[1]?><br>
                 收件人：<?php echo $mail_info[2]?><br>
@@ -72,8 +101,10 @@ echo $info['user_name'] . ", 好好学习 天天向上";
         </td>
     </tr>
     <tr>
-        <td>
-            <?php echo $mail_info[4]?>
+        <td height="75%" width="100%" >
+            <div class="comments" >
+                正文：<br><br><?php echo $mail_info[4]?>
+            </div>
         </td>
     </tr>
 </table>

@@ -78,13 +78,13 @@ class UserClient
         $this->port = MailUser::getPort($mail_name);
 
         if($this->port == -1){
-            print "用户'" . $mail_name . "'不存在\n";
+//            print "用户'" . $mail_name . "'不存在\n";
             return 0;
         }
 
-        print "User Port:" . $this->port . "\n";
-
-        print "Client connect \n";
+//        print "User Port:" . $this->port . "\n";
+//
+//        print "Client connect \n";
 
         return socket_connect($this->socket, $hostip, $this->port);
 
@@ -94,13 +94,13 @@ class UserClient
 
         socket_send($this->socket, $msg, strlen($msg), MSG_DONTROUTE);
         if($msg == "QUIT"){
-            print "QUIT\n";
+//            print "QUIT\n";
             socket_close($this->socket);
 
         }else{
             $callback = socket_read($this->socket, 1024);
 //            print $callback . "\n";
-            print "From Server: " .$callback . "\n";
+//            print "From Server: " .$callback . "\n";
 
             $error = explode(" ", $callback);
 

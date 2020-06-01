@@ -50,7 +50,7 @@ class MailServer
         while(true){
             $client_socket = socket_accept($this->socket);
             socket_getpeername($client_socket, $client_address, $port);
-            echo "peername: " . $client_address . $port . "\n";
+//            echo "peername: " . $client_address . $port . "\n";
 
 //            为客户端创建一个进程来调用client_handle()
             $client_process_pid = pcntl_fork();
@@ -92,9 +92,9 @@ class MailServer
                 break;
             }
 
-            print "Request: " . $request . "\n";
+//            print "Request: " . $request . "\n";
             $msg = $this->command_del($request, $user_server, $client_address, $port);
-            print "send to client msg: " . $msg . "\n";
+//            print "send to client msg: " . $msg . "\n";
             socket_send($client_socket, $msg, strlen($msg), MSG_DONTROUTE);
 
             if($this->flag == 1){
@@ -120,7 +120,7 @@ class MailServer
                 //为用户随机分配端口号
                 $usport = mt_rand(50000, 59999);
 
-                print "random client port: " . $usport . "\n";
+//                print "random client port: " . $usport . "\n";
 
                 if($user_server->bind($usport) == 1){
                     $flag = 1;

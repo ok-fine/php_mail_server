@@ -132,8 +132,8 @@ class Mail
         if($ac_list == null) $ac_list = array();
         if($ip_list == null) $ip_list = array();
 
-        var_dump($ac_list);
-        var_dump($ip_list);
+//        var_dump($ac_list);
+//        var_dump($ip_list);
 
         $ac_all = "begin:";
         $ip_all = "begin:";
@@ -144,11 +144,6 @@ class Mail
         for($i = 0 ; $i < count($ip_list) ; $i++){
             $ip_all .= $ip_list[$i];
         }
-
-        echo "ac:" . $ac_all . "<br>";
-        echo "ip:" . $ip_all . "<br>";
-
-        echo strpos($ac_all, $ac);
 
         if(strpos($ac_all, $ac) || strpos($ip_all, $ip)){
             return false;

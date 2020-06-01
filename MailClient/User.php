@@ -15,13 +15,10 @@ class User
         //链接MailServer的socket
         $client->connect("register", \src\Config::$HOSTIP);
 
-
         $res = $client->execute("register " . $mail_name . " " . $mail_pwd);
         $client->execute("QUIT");
 
         return $res;
-
-
     }
 
     static public function login($mail_name, $mail_pwd){

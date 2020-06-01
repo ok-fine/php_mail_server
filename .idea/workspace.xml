@@ -3,7 +3,15 @@
   <component name="ChangeListManager">
     <list default="true" id="b5d51722-cd1f-4950-8faf-15e60a1825ab" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controller/LogMgr.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controller/LogMgr.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controller/MailInfo.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controller/MailInfo.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controller/POP3Mgr.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controller/POP3Mgr.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MailClient/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/MailClient/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MailServer/POP3.php" beforeDir="false" afterPath="$PROJECT_DIR$/MailServer/POP3.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MailServer/SMTP.php" beforeDir="false" afterPath="$PROJECT_DIR$/MailServer/SMTP.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MailServer/UserClient.php" beforeDir="false" afterPath="$PROJECT_DIR$/MailServer/UserClient.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MailServer/UserServer.php" beforeDir="false" afterPath="$PROJECT_DIR$/MailServer/UserServer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/Mail.php" beforeDir="false" afterPath="$PROJECT_DIR$/db/Mail.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,7 +50,10 @@
       <recent name="$PROJECT_DIR$/MailClient" />
     </key>
   </component>
-  <component name="RunManager" selected="JavaScript Debug.Login.php">
+  <component name="RunManager" selected="JavaScript Debug.LogMgr.php">
+    <configuration name="LogMgr.php" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/try_mail_server/Controller/LogMgr.php" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
     <configuration name="Login.php" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/try_mail_server/Controller/Login.php" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
@@ -55,16 +66,13 @@
     <configuration name="SMTP.php" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/try_mail_server/MailServer/SMTP.php" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
-    <configuration name="SystemMgr.php" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/try_mail_server/Controller/SystemMgr.php" useBuiltInWebServerPort="true">
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JavaScript Debug.LogMgr.php" />
         <item itemvalue="JavaScript Debug.Login.php" />
+        <item itemvalue="JavaScript Debug.POP3Mgr.php" />
         <item itemvalue="JavaScript Debug.SMTP.php" />
         <item itemvalue="JavaScript Debug.Mail.php" />
-        <item itemvalue="JavaScript Debug.POP3Mgr.php" />
-        <item itemvalue="JavaScript Debug.SystemMgr.php" />
       </list>
     </recent_temporary>
   </component>
@@ -106,6 +114,9 @@
       <workItem from="1590902071317" duration="107000" />
       <workItem from="1590911924798" duration="5140000" />
       <workItem from="1590917831221" duration="7606000" />
+      <workItem from="1590940908429" duration="772000" />
+      <workItem from="1590991278156" duration="62000" />
+      <workItem from="1590993967588" duration="1771000" />
     </task>
     <servers />
   </component>
@@ -189,11 +200,11 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="208" y="23" width="1024" height="803" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1590821198042" />
-    <state x="399" y="275" key="com.intellij.ide.util.TipDialog" timestamp="1590917842889">
-      <screen x="0" y="23" width="1440" height="803" />
+    <state x="399" y="282" key="com.intellij.ide.util.TipDialog" timestamp="1590991323217">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="399" y="282" key="com.intellij.ide.util.TipDialog/0.0.1440.900@0.0.1440.900" timestamp="1590813596710" />
-    <state x="399" y="275" key="com.intellij.ide.util.TipDialog/0.23.1440.803@0.23.1440.803" timestamp="1590917842889" />
+    <state x="399" y="282" key="com.intellij.ide.util.TipDialog/0.0.1440.900@0.0.1440.900" timestamp="1590991323217" />
+    <state x="399" y="275" key="com.intellij.ide.util.TipDialog/0.23.1440.803@0.23.1440.803" timestamp="1590940908604" />
     <state x="399" y="275" key="com.intellij.ide.util.TipDialog/0.23.1440.805@0.23.1440.805" timestamp="1590646729428" />
     <state x="515" y="146" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1590665061024">
       <screen x="0" y="0" width="1440" height="900" />

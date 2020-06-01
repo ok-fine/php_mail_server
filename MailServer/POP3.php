@@ -92,7 +92,7 @@ class POP3
 
         while(true){
             $request = socket_read($client_socket, 1024);
-            print "request: " . $request . "\n";
+//            print "request: " . $request . "\n";
 
             $sstr = explode(" ", $request);
             try {
@@ -114,7 +114,7 @@ class POP3
                         $sstr = explode(" ", $recv_data);
                         if(count($sstr) == 2 && $sstr[0] == "PASS"){
                             $temp_pwd2 = base64_decode($sstr[1]);
-                            print "password: " . $temp_pwd1 . " ". $temp_pwd2 . "\n";
+//                            print "password: " . $temp_pwd1 . " ". $temp_pwd2 . "\n";
 
                             //日志内容
                             $data = array(
@@ -147,16 +147,16 @@ class POP3
                 else if($login_state == 1 && $sstr[0] == "LIST"){
                     $mails = \src\Mail::listMail($user_name);  //mails(mail_from, subject, body, time)
                     $response = json_encode($mails);
-                    print "response:" . $response . "\n";
+//                    print "response:" . $response . "\n";
                     socket_send($client_socket, $response, strlen($response), MSG_DONTROUTE);
                 }
                 //获取邮件详情
                 else if($login_state == 1 && count($sstr) == 2 && $sstr[0] == "RETR"){
                     $mail_id = $sstr[1];
                     $mail_info =\src\Mail::getMail($mail_id);  //mails(mail_from, subject, body, time)
-                    echo "mail_info:" . $mail_info[3] . "\n";
+//                    echo "mail_info:" . $mail_info[3] . "\n";
                     $response = json_encode($mail_info);
-                    print "response:" . $response . "\n";
+//                    print "response:" . $response . "\n";
                     socket_send($client_socket, $response, strlen($response), MSG_DONTROUTE);
 
                     $mail = json_encode(array(
@@ -196,9 +196,9 @@ class POP3
                             'subject' => $mail_info[3]
                         ));
 
-                        echo "delet mail info:";
-                        var_dump($mail);
-                        echo "<br>";
+//                        echo "delet mail info:";
+//                        var_dump($mail);
+//                        echo "<br>";
 
                         \src\Mail::deleteMail($delete_list[$i]);
 

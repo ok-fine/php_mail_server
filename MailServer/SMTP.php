@@ -64,7 +64,7 @@ class SMTP
 
         while(true){
             $request = socket_read($client_socket, 1024);
-            print "request: " . $request . "\n";
+//            print "request: " . $request . "\n";
 
             //并不知道为什么要切割一下。。。。
             if(strpos($request, ']')){
@@ -73,8 +73,8 @@ class SMTP
             $sstr = explode(" ", $request);
 
 
-            print "login_state" . $login_state . "\n";
-            print "command[0]: " . $sstr[0] . "\n";
+//            print "login_state" . $login_state . "\n";
+//            print "command[0]: " . $sstr[0] . "\n";
 
             //注意下标越界
             if($sstr[0] == "HELO"){
@@ -97,7 +97,7 @@ class SMTP
 
                 $recv_data = socket_read($client_socket, 1024);
                 $username = base64_decode($recv_data);
-                print "username: " . $username . "\n";
+//                print "username: " . $username . "\n";
 
                 //用户密码认证
                 $response = base64_encode("Password=");
@@ -105,7 +105,7 @@ class SMTP
 
                 $recv_data = socket_read($client_socket, 1024);
                 $password = base64_decode($recv_data);
-                print "password: " . $password . "\n";
+//                print "password: " . $password . "\n";
 
                 //日志内容
                 $data = array(
@@ -171,8 +171,8 @@ class SMTP
                 $recv_data = socket_read($client_socket, 2048);
 //                $mail_body = mb_convert_case($recv_data, "utf-8");
                 $mail_body = $recv_data;
-                print "body: ";
-                var_dump($mail_body);
+//                print "body: ";
+//                var_dump($mail_body);
 
                 $mail = json_encode(array(
                     'from' => $mail_source,
@@ -209,8 +209,8 @@ class SMTP
 
     //UserServer将从客户端（client_address，port）处读到的邮件发送到另一个us服务器
     static  public function us_mail_send($mail, $client_address, $port, $user_name){
-        print "mail: ";
-        var_dump($mail);
+//        print "mail: ";
+//        var_dump($mail);
 
 
         $mail_array = json_decode($mail, true);       //用于群发
@@ -230,7 +230,7 @@ class SMTP
         //群fa：
         $mail_des = explode(" ", $mail_array['to']);
         for($i = 0; $i < count($mail_des); $i++){
-            print "mail to: " . $mail_des[$i] . "\n";
+//            print "mail to: " . $mail_des[$i] . "\n";
             $mail__log['to'] = $mail_array['to'] = $mail_des[$i];
 
             $client_socket = socket_create(AF_INET, SOCK_STREAM, 0);
@@ -241,13 +241,13 @@ class SMTP
                 if(socket_bind($client_socket, $clientip , $ucport)){
                     $flag = 1;
                 }else{
-                    print "端口号被占用\n";
+//                    print "端口号被占用\n";
                     $flag = 0;
                 }
             }
 
             $usport = \src\MailUser::getPort($mail_array['to']); //另一个邮件的端口号
-            print "send to host and Port: '" . $hostip . "' ". $usport . "\n";
+//            print "send to host and Port: '" . $hostip . "' ". $usport . "\n";
 
             $flagi = 0;
             $num = 0;//当尝试链接目标服务器失败后，自动保存到邮箱中，
@@ -261,7 +261,7 @@ class SMTP
                         if(socket_connect($client_socket, $hostip, $usport)){
                             $flagi = 1;
                         }else{
-                            print "目的服务器程序('" . $hostip . "' " . $usport . ")未启动\n";
+//                            print "目的服务器程序('" . $hostip . "' " . $usport . ")未启动\n";
                             time_sleep_until(time() + 120); //1800每半小时发一次
                         }
                     }
@@ -282,22 +282,22 @@ class SMTP
                 $result = socket_read($client_socket, 1024);
                 socket_close($client_socket);
 
-                echo "send result: " . $result . "\n";
+//                echo "send result: " . $result . "\n";
 
                 $result = explode(" ", $result);
-                var_dump($result);
+//                var_dump($result);
                 if($result[1] == "Error"){
                     continue;
                 }
             }
 
-            echo "succnum：" . $succ . "\n";
+//            echo "succnum：" . $succ . "\n";
             $succ++;
 
             //投递邮件
             \src\Log::create($client_address, $port,"deliver mail", json_encode($mail_log), "Successful", $user_name, "SMTP");
         }
-        echo "succnum：" . $succ . "\n";
+//        echo "succnum：" . $succ . "\n";
         return $succ == count($mail_des);
     }
 
@@ -306,18 +306,18 @@ class SMTP
         socket_getpeername($client_socket, $ip, $port);
 
         $mail = socket_read($client_socket, 1024); //json格式
-        print "request mail: ";
-        echo $mail . "\n";
+//        print "request mail: ";
+//        echo $mail . "\n";
         $mail = json_decode($mail, true);
         var_dump($mail);
 
-        echo "username:" ;
-        var_dump($mail['to']);
-        echo "\n过滤地址:";
-        var_dump($mail['from']);
-        echo "\n过滤IP:";
-        var_dump($ip);
-        echo "\n";
+//        echo "username:" ;
+//        var_dump($mail['to']);
+//        echo "\n过滤地址:";
+//        var_dump($mail['from']);
+//        echo "\n过滤IP:";
+//        var_dump($ip);
+//        echo "\n";
 
         //过滤邮件地址和ip
         if(\src\Mail::filter_addr($mail['to'], $mail['from'], $ip )) {

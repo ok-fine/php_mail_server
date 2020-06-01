@@ -2,8 +2,20 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>收件箱</title>
+    <title>日志管理</title>
+    <link rel="stylesheet" href="css/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css">
     <style>
+        html,body {
+          height: 100%;
+        }
+        body {
+          margin-left: 60px;
+          margin-top: 60px;
+          margin-right: 60px;
+          margin-bottom: 60px;
+          overflow:hidden;
+        }
         .breadcrumb {
             background-color: #ffffff;
             padding: 0;
@@ -114,12 +126,10 @@ echo $info['user_name'] . ", 好好学习 天天向上";
 
 ?>
 
-<button type="button" class="btn btn-primary" onclick="window.location.href='HomePage.php'">返回</button><br><br>
-
 <body>
-
-    <div> <h3>日志管理</h3></div >
-    <ol class="breadcrumb" style="display: inline">
+    <div class="title">日志管理</div>
+    <button type="button" class="btn btn-primary" onclick="window.location.href='HomePage.php'">返回</button><br><br>
+    <ol class="breadcrumb" style="display: inline;background-color: white">
         <?php switch ($type){
             case "SMTP": ?>
                 <li class="active">
@@ -176,14 +186,14 @@ echo $info['user_name'] . ", 好好学习 天天向上";
         <?php }?>
     </ol>
     <br>
-    <table width="100%" border="1" align="center">
-        <tr>
-            <td width="10%">登陆ip</td><td width="15%">事件状态</td><td width="10%">操作用户</td>
+    <table width="100%" height="90%" border="1" align="center" style="background-color: white">
+        <tr height="20px">
+            <td height="20px" width="10%">登陆ip</td><td width="15%">事件状态</td><td width="10%">操作用户</td>
             <td width="10%">事件类型</td><td width="25%">事件内容</td><td width="20%">操作时间</td>
             <td width="10%" colspan="2">操作</td>
         </tr>
         <?php for($i = $start; $i < $end; $i++){  ?>
-        <tr>
+        <tr height="20px">
             <td><?php echo getIp($log_list[$i][2]); ?></td>
             <td><?php echo $state = getState($log_list[$i][5], $detail[$i % \src\Config::$PAGENUM]); ?></td>
             <td><?php echo $log_list[$i][6]; ?></td>
@@ -191,21 +201,25 @@ echo $info['user_name'] . ", 好好学习 天天向上";
             <td><?php echo getContent($log_list[$i][4], $detail[$i % \src\Config::$PAGENUM]); ?></td>
             <td><?php echo $log_list[$i][1]; ?></td>
             <td align="center">
-                <a href="./LogMgr.php?detail=<?php echo json_encode($detail);?>&i=<?php echo $i % \src\Config::$PAGENUM; ?>&page=<?php echo $start ?>&type=<?php echo $type;?>">详情</a>
+                <a href="./LogMgr.php?detail=<?php echo json_encode($detail);?>&i=<?php echo $i % \src\Config::$PAGENUM; ?>&page=<?php echo $start ?>&type=<?php echo $type;?>"><img src="images/chakan.png" width="24" height="24"></a>
             </td>
             <td align="center">
-                <a href="./LogMgr.php?delete=<?php echo $log_list[$i][0] ?>&page=<?php echo $start ?>&type=<?php echo $type;?>">删除</a>
+                <a href="./LogMgr.php?delete=<?php echo $log_list[$i][0] ?>&page=<?php echo $start ?>&type=<?php echo $type;?>"><img src="images/shanchu.png" width="24" height="24"></a>
             </td>
         </tr>
         <?php } ?>
+        <tr height="20px">
+            <td style="border: 0;width: 50px">
+                第<?php $page_num = ceil($log_num / \src\Config::$PAGENUM); echo min($page_num, $start / \src\Config::$PAGENUM + 1); ?>页/共<?php echo $page_num;?>页
+                <a href="LogMgr.php?start=<?php echo $start - \src\Config::$PAGENUM ?>&type=<?php echo $type;?>" >上一页</a>
+                <a href="LogMgr.php?start=<?php echo $start + \src\Config::$PAGENUM ?>&type=<?php echo $type;?>">下一页</a> 
+            </td>
+        </tr>
+        <tr>
+            
+        </tr>
     </table>
-    <div>
-        第<?php $page_num = ceil($log_num / \src\Config::$PAGENUM); echo min($page_num, $start / \src\Config::$PAGENUM + 1); ?>页/共<?php echo $page_num;?>页
-        <a href="LogMgr.php?start=<?php echo $start - \src\Config::$PAGENUM ?>&type=<?php echo $type;?>" >上一页</a>
-        <a href="LogMgr.php?start=<?php echo $start + \src\Config::$PAGENUM ?>&type=<?php echo $type;?>">下一页</a>
-    </div>
-
-
+    
 </body>
 <?php
 function getIp($ip){

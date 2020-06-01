@@ -81,12 +81,12 @@ class UserServer
 
             if($port >= 50000 && $port <= 59999){
                 //服务器连接，此时应该是处于登陆状态的时候
-                print "服务器连接\n";
+//                print "服务器连接\n";
 
                 $server_process_pid = pcntl_fork();
 
                 if($server_process_pid == -1){
-                    print "Error : fork defeat\n";
+//                    print "Error : fork defeat\n";
 
                 }else if($server_process_pid == 0){
                     //返回子进程号
