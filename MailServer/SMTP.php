@@ -29,6 +29,22 @@ class SMTP
      * c: body
      */
 
+    /*
+     * mail服务器格式：
+     * c: HELO
+     * c: AUTH LOGIN
+     * s: dXNlcm5hbWU9
+     * c: username --wjy  //base64编码
+     * c: UGFzc3dvcmQ9
+     * c: password --123  //base64编码
+     * c: MAIL FROM: wjy@123.com
+     * c: RCPT TO: kaia@123.com  //群发的话，就在后面放多个目的邮件
+     * c: SUBJECT: hava a try!   //主题
+     * c: DATA
+     * s: Enter mail...
+     * c: body      //填写邮件内容
+     */
+
     static public function send_mail($mail_name, $mail_pwd, $send_to, $subject, $body){
         $client = new UserClient();
         $client->bind(1);
